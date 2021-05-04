@@ -1,0 +1,200 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  src: url("../assets/fuentes/batmfa__.ttf");
+  font-family: "Gotico";
+}
+@font-face {
+  src: url("../assets/fuentes/BATMAN__.ttf");
+  font-family: "classicBatman";
+}
+@font-face {
+  src: url("../assets/fuentes/Batman The Dark Knight.ttf");
+  font-family: "Dark-Knight";
+}
+h2, h3, p, button, span, a {
+  font-family: Gotico;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.auxiliar {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.modal {
+  background-color: rgba(42, 42, 42, 0.95);
+  padding: 20px 10px;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  row-gap: 10px;
+}
+
+body {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h2, span {
+  font-size: 26px;
+}
+
+.pantallaInicio {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  width: 100%;
+  background: #2a2a2a url("../assets/imagenes/logo-bat.png") no-repeat;
+  background-position: center;
+  display: flex;
+}
+.pantallaInicio .modal {
+  background: none;
+}
+
+.auxiliar {
+  display: none;
+}
+
+#subeNivel {
+  background-image: url("../assets/imagenes/fondoLogro.jpg");
+}
+
+#gameOver {
+  background-image: url("../assets/imagenes/fondoGameOver.jpg");
+}
+
+#endGame {
+  background-image: url("../assets/imagenes/fondoCompletado.jpg");
+}
+
+.btn {
+  background-color: #fbff3b;
+  color: #2a2a2a;
+  width: 150px;
+  padding: 10px;
+}
+
+#burguer {
+  display: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  margin: auto;
+  padding: 2px;
+  background-color: #fbff3b;
+  text-align: center;
+}
+#burguer img {
+  height: 100%;
+  width: 80%;
+}
+
+.barra-menu {
+  height: 0;
+  transition: 0.5s max-width;
+  max-width: 0;
+  background-image: url("../assets/imagenes/fondo9.jpg");
+  top: 0;
+  right: 0;
+}
+.barra-menu ul {
+  background-color: rgba(42, 42, 42, 0.75);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.barra-menu h2 {
+  margin: 10px 10px 0 10px;
+}
+.barra-menu hr {
+  width: 80%;
+}
+.barra-menu li {
+  padding: 10px;
+  text-align: center;
+}
+.barra-menu a {
+  font-size: 16px;
+}
+.barra-menu li:hover {
+  background-color: #fbff3b;
+}
+.barra-menu li:hover a {
+  color: #2a2a2a;
+}
+
+.barra-menu.visible {
+  height: 100%;
+  position: absolute;
+  max-width: 200px;
+}
+
+/*# sourceMappingURL=general.css.map */

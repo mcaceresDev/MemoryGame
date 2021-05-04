@@ -1,0 +1,29 @@
+// FUENTES TIPOGRAFICAS
+@font-face {
+  src: url("../assets/fuentes/batmfa__.ttf");
+  font-family: "Gotico";
+}
+@font-face {
+  src: url("../assets/fuentes/BATMAN__.ttf");
+  font-family: "classicBatman";
+}
+@font-face {
+  src: url("../assets/fuentes/Batman The Dark Knight.ttf");
+  font-family: "Dark-Knight";
+}
+
+// VARIABLES
+$amarillo:#fbff3b;
+$negro:#2a2a2a;
+$negroTransparente: rgba(42,42,42,95%);
+$negroTransparente2: rgba(42,42,42,75%);
+
+$fontGeneral: Gotico;
+$fontCartas1: classicBatman;
+$fontCartas2: Dark-Knight;
+
+$jumbo: 60px;
+$display: 40px;
+$titulo: 26px;
+$subtitulo: 20px;
+$cuerpo: 14px;

@@ -1,0 +1,113 @@
+@use 'reset';
+@use 'variables';
+@use 'reutilizables';
+@use 'mixins';
+
+// ESTILOS GENERALES
+body{
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h2, h3, p, button, span, a{
+  @extend %tipografiaItems;
+}
+h2, span{
+  font-size: variables.$titulo;
+}
+
+.pantallaInicio{
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  width: 100%;
+  background: variables.$negro url("../assets/imagenes/logo-bat.png") no-repeat;
+  background-position: center;
+  display: flex;
+
+      .modal{
+        background: none;
+      }
+}
+
+.auxiliar{
+  @extend %pantallas;
+  display: none;
+}
+#subeNivel{
+  background-image: url("../assets/imagenes/fondoLogro.jpg");
+}
+#gameOver{
+  background-image: url("../assets/imagenes/fondoGameOver.jpg");
+}
+#endGame{
+  background-image: url("../assets/imagenes/fondoCompletado.jpg");
+}
+
+.modal{
+  @extend %modals;
+}
+
+.btn{
+  background-color: variables.$amarillo;
+  color: variables.$negro;
+  width: 150px;
+  padding: 10px;
+}
+
+#burguer{
+  display: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  margin: auto;
+  padding: 2px;
+  background-color: variables.$amarillo;
+  text-align: center;
+      img{
+        height: 100%;
+        width: 80%;
+      }
+}
+
+.barra-menu{
+  height: 0;
+  transition: .5s max-width;
+  max-width: 0;
+  background-image: url('../assets/imagenes/fondo9.jpg');
+  top: 0;
+  right: 0;
+    ul{
+      background-color: variables.$negroTransparente2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+    }
+    h2{
+      margin: 10px 10px 0 10px;
+    }
+    hr{
+      width: 80%;
+    }
+    li{
+      padding: 10px;
+      text-align: center;
+    }
+    a{
+      font-size: 16px;
+    }
+    li:hover{
+      background-color: variables.$amarillo;
+    }
+    li:hover a{
+      color: variables.$negro;
+    }
+}
+
+.barra-menu.visible{
+  height: 100%;
+  position: absolute;
+  max-width: 200px;
+}
