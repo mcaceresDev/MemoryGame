@@ -53,5 +53,17 @@ niveles = [
                 movimientos: 30,
                 temporizadorMin: 1,
                 temporizadorSeg: 20
+            }, 
+            {
+                tarjetas: cartas[2].concat(cartas[1]),
+                movimientos: 40,
+                temporizadorMin: 1,
+                temporizadorSeg: 40
+            },
+            {
+                tarjetas: cartas[3].concat(cartas[2]),
+                movimientos: 50,
+                temporizadorMin: 2,
+                temporizadorSeg: 0
             }
            ];
