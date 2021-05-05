@@ -1,52 +1,39 @@
-@font-face {
-  src: url("../assets/fuentes/batmfa__.ttf");
-  font-family: "Gotico";
-}
-@font-face {
-  src: url("../assets/fuentes/BATMAN__.ttf");
-  font-family: "classicBatman";
-}
-@font-face {
-  src: url("../assets/fuentes/Batman The Dark Knight.ttf");
-  font-family: "Dark-Knight";
-}
-.carta, .reverso {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 10px;
-}
+@use 'variables';
+@use 'reutilizables';
 
-.cabecera {
+// main{
+//   @extend %pantallas;
+//   background-image: url('../assets/imagenes/mansion.jpg');
+// }
+
+.cabecera{
   height: auto;
-  background-color: rgba(42, 42, 42, 0.95);
+  background-color: variables.$negroTransparente;
   padding: 10px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
   row-gap: 10px;
-}
-.cabecera p {
-  color: #fbff3b;
+
+      p{
+        color: variables.$amarillo;
+      }
 }
 
-.contadores, .niveles {
+.contadores, .niveles{
   display: flex;
   flex-flow: column;
   row-gap: 20px;
   justify-content: center;
 }
 
-.mesa {
+.mesa{
   height: 80%;
   width: 90%;
   margin: auto;
   perspective: 2000px;
+
   display: flex;
   flex-flow: row wrap;
   column-gap: 5px;
@@ -54,85 +41,104 @@
   justify-content: center;
   align-content: center;
 }
-
-.carta {
+.carta{
   height: 60px;
   width: 60px;
+  @extend %cartas;
+  // padding: 2px;
   border-radius: 10px;
   position: relative;
-  background-color: #fbff3b;
-  transition: transform 0.3s;
+  background-color: variables.$amarillo;
+  transition: transform .3s;
   transform-style: preserve-3d;
 }
-
-.carta.descubierta {
+.carta.descubierta{
   transform: rotateY(180deg);
 }
+.reverso{
+  @extend %cartas;
 
-.reverso {
   background-position: center;
   background-size: cover;
   backface-visibility: hidden;
 }
+// .carta-Valor{
+//   @extend %cartas;
+//   font-family: variables.$fontCartas1;
+//   text-align: center;
+//   font-size: 50px;
+//   font-weight: bold;
+//   transform: rotateY(180deg);
+//   backface-visibility: hidden;
+// }
 
 .carta-Valor.acertada {
   animation: acierto 1.3s ease-in-out forwards;
 }
-
 .carta-Valor.error {
   animation: error 1s;
 }
 
-.descubierta.eliminado {
+.descubierta.eliminado{
   display: none;
 }
-
-.visible {
+.visible{
   display: flex;
 }
-
 @keyframes error {
-  10%, 90% {
+  10%,
+  90% {
     transform: rotateY(-180deg) translateX(-1px);
   }
-  20%, 80% {
+  20%,
+  80% {
     transform: rotateY(-180deg) translateX(2px);
   }
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: rotateY(-180deg) translateX(-4px);
   }
-  40%, 60% {
+  40%,
+  60% {
     transform: rotateY(-180deg) translateX(4px);
   }
 }
+
 @keyframes acierto {
   from {
     transform: rotateY(-180deg) scale3d(1, 1, 1);
     opacity: 1;
   }
+
   25% {
     transform: rotateY(-180deg) scale3d(1.1, 1.1, 1.1);
     opacity: 1;
   }
+
   to {
     transform: rotateY(-180deg) scale3d(1, 1, 1);
     opacity: 0;
   }
 }
-@media screen and (min-width: 400px) {
-  .contadores, .niveles {
+
+@media screen and (min-width:400px) {
+  .contadores, .niveles{
     flex-flow: row wrap;
     column-gap: 20px;
   }
-
-  .carta {
+  .carta{
     width: 80px;
     height: 80px;
   }
-
-  .carta-Valor {
-    font-size: 60px;
+  .carta-Valor{
+    font-size: variables.$jumbo;
   }
 }
 
-/*# sourceMappingURL=main.css.map */
+@media screen and (min-width:700px) {
+    .mesa{
+    height: 90%;
+    width: 50%;
+  }
+}
