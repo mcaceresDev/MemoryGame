@@ -121,7 +121,7 @@ h2, span {
   z-index: 1;
   height: 100vh;
   width: 100%;
-  background: #2a2a2a url("../assets/imagenes/logo-bat.png") no-repeat;
+  background: #2a2a2a url("../assets/imagenes/batman-portada1.jpg") no-repeat;
   background-position: center;
   display: flex;
 }
@@ -134,15 +134,15 @@ h2, span {
 }
 
 #subeNivel {
-  background-image: url("../assets/imagenes/fondoLogro.jpg");
+  background-image: url("../assets/imagenes/fondo3.jpg");
 }
 
 #gameOver {
-  background-image: url("../assets/imagenes/fondoGameOver.jpg");
+  background-image: url("../assets/imagenes/fondoFallo.jpg");
 }
 
 #endGame {
-  background-image: url("../assets/imagenes/fondoCompletado.jpg");
+  background-image: url("../assets/imagenes/fondoFin.jpg");
 }
 
 .btn {
@@ -174,7 +174,7 @@ h2, span {
 }
 .btn-cierre img {
   height: 100%;
-  width: 80%;
+  width: 100%;
 }
 
 .cabeceraMenu {
@@ -190,7 +190,7 @@ h2, span {
   max-width: 0;
   background-image: url("../assets/imagenes/fondo9.jpg");
   background-size: cover;
-  background-position: 30px;
+  background-position: -250px;
   top: 0;
   right: 0;
 }
@@ -225,11 +225,11 @@ h2, span {
 }
 
 main {
-  background-image: url("../assets/imagenes/mansion.jpg");
+  background-image: url("../assets/imagenes/fondo5.jpg");
 }
 
 .reverso {
-  background: url("../assets/imagenes/reversoCarta.jpg") no-repeat;
+  background: rgba(42, 42, 42, 0.95) url("../assets/imagenes/bat.svg") no-repeat;
 }
 
 .carta-Valor {
@@ -241,4 +241,4 @@ main {
   backface-visibility: hidden;
 }
 
-/*# sourceMappingURL=general.css.map */
+/*# sourceMappingURL=tema2.css.map */

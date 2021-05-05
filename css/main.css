@@ -10,7 +10,7 @@
   src: url("../assets/fuentes/Batman The Dark Knight.ttf");
   font-family: "Dark-Knight";
 }
-.carta, .reverso, .carta-Valor {
+.carta, .reverso {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -19,23 +19,6 @@
   right: 0;
   bottom: 0;
   border-radius: 10px;
-}
-
-main {
-  height: 100vh;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-main {
-  background-image: url("../assets/imagenes/mansion.jpg");
 }
 
 .cabecera {
@@ -87,18 +70,8 @@ main {
 }
 
 .reverso {
-  background: url("../assets/imagenes/reversoCarta.jpg") no-repeat;
   background-position: center;
   background-size: cover;
-  backface-visibility: hidden;
-}
-
-.carta-Valor {
-  font-family: classicBatman;
-  text-align: center;
-  font-size: 50px;
-  font-weight: bold;
-  transform: rotateY(180deg);
   backface-visibility: hidden;
 }
 

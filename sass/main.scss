@@ -1,10 +1,10 @@
 @use 'variables';
 @use 'reutilizables';
 
-main{
-  @extend %pantallas;
-  background-image: url('../assets/imagenes/mansion.jpg');
-}
+// main{
+//   @extend %pantallas;
+//   background-image: url('../assets/imagenes/mansion.jpg');
+// }
 
 .cabecera{
   height: auto;
@@ -57,20 +57,20 @@ main{
 }
 .reverso{
   @extend %cartas;
-  background: url('../assets/imagenes/reversoCarta.jpg') no-repeat;
+
   background-position: center;
   background-size: cover;
   backface-visibility: hidden;
 }
-.carta-Valor{
-  @extend %cartas;
-  font-family: variables.$fontCartas1;
-  text-align: center;
-  font-size: 50px;
-  font-weight: bold;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-}
+// .carta-Valor{
+//   @extend %cartas;
+//   font-family: variables.$fontCartas1;
+//   text-align: center;
+//   font-size: 50px;
+//   font-weight: bold;
+//   transform: rotateY(180deg);
+//   backface-visibility: hidden;
+// }
 
 .carta-Valor.acertada {
   animation: acierto 1.3s ease-in-out forwards;
@@ -135,10 +135,3 @@ main{
     font-size: variables.$jumbo;
   }
 }
-
-// @media screen and (min-width:400px) {
-//   .contadores, .niveles{
-//     flex-flow: row wrap;
-//     column-gap: 20px;
-//   }
-// }

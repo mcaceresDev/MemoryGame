@@ -1,3 +1,4 @@
+//--------------- LISTENERS ----------------------
 let avanza = document.querySelector("#avanzar");
 avanza.addEventListener("click", subeNivel);
 
@@ -14,6 +15,13 @@ reinicia.forEach(function(elemento) {
 let reintenta = document.querySelector(".reintenta");
 reintenta.addEventListener("click", reintentar);
 
+document.querySelector("#tema").addEventListener("click", function() {
+  document.getElementById('cmbTema').href = './css/tema2.css'
+})
+
+document.querySelector("body").addEventListener("click", clickFueraDeMenu);
+
+document.addEventListener("keydown", teclaEscCierraMenu);
 //---------- TEMPORIZADOR -----------------
 function iniciaTiempo() {
   let segundos = niveles[nivelActual].temporizadorSeg;
@@ -21,9 +29,6 @@ function iniciaTiempo() {
   let segundosTexto;
   let minutosTexto;
 
-  if (modoRelax = true) {
-    tiempo = setInterval(actualizaTiempo, 1000);
-  }
     function actualizaTiempo() {
       segundos--;
       if (segundos < 0) {
@@ -35,6 +40,7 @@ function iniciaTiempo() {
         minutos = 0;
         clearInterval(tiempo);
         gameOver();
+        fallaste.play();
       }
       segundosTexto = segundos;
       minutosTexto = minutos;
@@ -47,7 +53,12 @@ function iniciaTiempo() {
       document.querySelector("#minutos").innerText = minutosTexto;
       document.querySelector("#segundos").innerText = segundosTexto;
     }
-  tiempo = setInterval(actualizaTiempo, 1000);
+  if (modoRelax === true) {
+    return;
+  }
+  else {
+    tiempo = setInterval(actualizaTiempo, 1000);
+  }
 }
 
 //---------- CONTADOR -----------------
@@ -61,10 +72,11 @@ function contadorMovimientos() {
   movimientosTexto = movimientos;
   document.querySelector("#mov").innerText = movimientosTexto;
 
-  if (movimientos === totalMov) {
+  if (movimientos === totalMov && modoRelax===false) {
     let perdiste = document.querySelector(".content");
     perdiste.innerHTML = "<h2>Movimientos Agotados</h2>" + "<p>Has sobrepasado el límite de movimientos</p>";
     gameOver();
+    fallaste.play();
   }
   return;
 }
@@ -75,7 +87,6 @@ function subeNivel() {
   nivelActual++;
   if (nivelActual === niveles.length) {
     finalizar();
-    return;
   }
   movTotal.innerText = niveles[nivelActual].movimientos;
   let nivelTexto = nivelActual + 1;
@@ -88,6 +99,14 @@ function subeNivel() {
   document.querySelector("#subeNivel").classList.remove("visible");
   comienza();
     iniciaTiempo();
+}
+
+//Funcion para establecer Niveles
+function cambiaNivel() {
+  var nvl = parseInt(this.dataset.nivel);
+  nivelActual = nvl;
+  movTotal.innerText = niveles[nivelActual].movimientos;
+  comienza();
 }
 
 //---------- GAME OVER -----------------
@@ -123,11 +142,21 @@ function reintentar() {
 
 //---------- FIN JUEGO -----------------
 function finalizar() {
-  document.querySelector("#endGame").classList.add("visible");
+  if (nivelActual === niveles.length) {
+    document.querySelector("#endGame").classList.add("visible");
+    return;
+  }
+  else {
+    document.querySelector("#subeNivel").classList.add("visible");
+  }
 }
 
 //---------- FUNCION SALIR -----------------
 function Salir() {
+  if (modoRelax === true) {
+    modoRelax = false;
+    btnMenu.style.display = "none";
+  }
   let intro = document.querySelector("#pistaFondo");
   let auxiliar = document.querySelectorAll(".auxiliar");
   auxiliar.forEach(function(elemento) {
@@ -139,4 +168,19 @@ function Salir() {
 
   bienvenida.style.display = 'flex';
   intro.play();
+}
+//---------- FUNCION CERRAR MENU NIVELES -----------------
+
+function clickFueraDeMenu(evento) {
+  if (evento.target.closest(".barra-menu")) {
+    return;
+  }
+  document.querySelector(".barra-menu").classList.remove("visible");
+}
+
+function teclaEscCierraMenu(evento) {
+  console.log(evento.key);
+  if (evento.key === "Escape") {
+    cerrarMenu();
+  }
 }

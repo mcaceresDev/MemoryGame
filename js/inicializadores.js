@@ -12,6 +12,7 @@ let indicadorNivel = document.querySelector("#nivel");
 let volteo = document.querySelector("#volteo");
 let aciertos = document.querySelector("#acertado");
 let fallos = document.querySelector("#fallo");
+let fallaste = document.querySelector("#fallaste");
 
 //-------- INICIALIZADORES ----------------
 var menu = document.querySelector('#burguer');

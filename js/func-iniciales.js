@@ -2,11 +2,19 @@
 let btnMenu = document.querySelector("#burguer");
 btnMenu.addEventListener('click', mostrarNiveles);
 
+let cierre = document.querySelector(".btn-cierre");
+cierre.addEventListener('click', cerrarMenu);
+
 document.querySelector("#relax").addEventListener("click", relax);
 
-function mostrarNiveles() {
+function mostrarNiveles(evento) {
+  evento.stopPropagation();
   let menu = document.querySelector(".barra-menu");
   menu.classList.add('visible');
+}
+function cerrarMenu() {
+  let menu = document.querySelector(".barra-menu");
+  menu.classList.remove('visible');
 }
 
 function relax() {
@@ -28,13 +36,37 @@ function Iniciar() {
    indicadorNivel.innerText = "0" + nivelTexto;
    movTotal.innerText = "0" + niveles[nivelActual].movimientos;
 
+
   bienvenida.style.display = "none";
   comienza();
-  iniciaTiempo();
+
+  if (modoRelax === true) {
+    let menuNiveles = document.querySelector("#menuNiveles");
+
+    niveles.forEach(function(elemento, indice) {
+      let ctrlNiveles = document.createElement("li");
+        ctrlNiveles.innerHTML = "<a class='nivel' data-nivel="
+         + indice + "> Nivel " + (indice + 1) + "</a>";
+
+    menuNiveles.appendChild(ctrlNiveles);
+    });
+    //asignamos el listener a cada elemento de la lista de seleccion de niveles
+    document.querySelectorAll(".nivel").forEach(function(elemento) {
+      elemento.addEventListener("click", cambiaNivel);
+    });
+
+    return;
+  }
+
+  else {
+    iniciaTiempo();
+  }
 }
 
 //------------FUNCION DE CREACION DE MESA DE JUEGO--------------------
 function comienza() {
+  document.querySelector("#pistaFondo").load();
+
   let mesa = document.querySelector(".mesa");
   let mazo = niveles[nivelActual].tarjetas;
   let cartas = baraja(mazo);
@@ -89,13 +121,14 @@ function comparar(descubiertas) {
   if (descubiertas[0].dataset.contenido  === descubiertas[1].dataset.contenido) {
     acierto(descubiertas);
     aciertos.play();
-        tarjetasAcertadas = document.querySelectorAll(".acertada");
+
+        let tarjetasAcertadas = document.querySelectorAll(".acertada");
         if (tarjetasAcertadas.length === document.querySelectorAll(".carta").length) {
           setTimeout(function() {
             movimientos = 0;
-            clearInterval(tiempo);
             document.querySelector("#mov").innerText = movimientos;
-            document.querySelector("#subeNivel").classList.add("visible");
+            finalizar();
+            clearInterval(tiempo);
           }, 1000);
         }
         else {
@@ -121,17 +154,15 @@ function acierto(lasTarjetas) {
       elemento.style.display = 'none';
     });
   } ,1000);
-  // document.querySelector("#acertado").play();
+
 }
 
 //----- FUNCION DE ERROR ----
 function error(lasTarjetas) {
-  // let totalDescubiertas = document.querySelectorAll(".descubierta");
-  // totalDescubiertas.classList.remove("descubierta");
 
   lasTarjetas.forEach(function(elemento){
     elemento.classList.add("error");
-    // document.querySelector("#fallo").play();
+
   });
 
   setTimeout(

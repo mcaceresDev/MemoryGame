@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batman Cards</title>
-    <link rel="stylesheet" href="./css/general.css">
+    <link id="cmbTema" rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/main.css">
   </head>
 
@@ -15,7 +15,7 @@
             <h2>Batman Cards</h2>
             <button class="btn comienzo" type="button" name="button">Jugar Ahora</button>
             <button id="relax" class="btn" type="button" name="button">Modo Relax</button>
-            <button class="btn" type="button" name="button">cambiar tema</button>
+            <button id="tema" class="btn" type="button" name="button">cambiar tema</button>
           </div>
         </div>
 <!-- ______________CONTENIDO PRINCIPAL________________-->
@@ -87,18 +87,24 @@
               <audio id="volteo" src="./assets/audios/carta.mp3"  type="audio" preload="auto"> </audio>
               <audio id="fallo" src="./assets/audios/el_joker_risa.mp3"  type="audio" preload="auto"> </audio>
               <audio id="acertado" src="./assets/audios/punch-batman.mp3"  type="audio" preload="auto"> </audio>
-
+              <audio id="fallaste" src="./assets/audios/jocker_sms.mp3"  type="audio" preload="auto"> </audio>
         </main>
 <!--_____________ fin principal __________________________-->
         <aside class="barra-menu">
           <ul>
-            <h2>Niveles</h2>
+            <span class="cabeceraMenu">
+              <span class="btn-cierre"><img src="./assets/imagenes/cerrar.png" alt=""></span>
+              <h2>Niveles</h2>
+            </span>
             <hr>
-            <li><a>Nivel 1</a></li>
-            <li><a>Nivel 2</a></li>
-            <li><a>Nivel 3</a></li>
-            <li><a>Nivel 4</a></li>
-            <li><a>Nivel 5</a></li>
+            <ul id="menuNiveles">
+
+            </ul>
+            <!-- <li><a id="nivel1">Nivel 1</a></li>
+            <li><a id="nive2">Nivel 2</a></li>
+            <li><a id="nive3">Nivel 3</a></li>
+            <li><a id="nive4">Nivel 4</a></li>
+            <li><a id="nive5">Nivel 5</a></li> -->
           </ul>
         </aside>
 <!-- _____________fin menú ___________________________-->

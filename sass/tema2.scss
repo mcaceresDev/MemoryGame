@@ -22,7 +22,7 @@ h2, span{
   z-index: 1;
   height: 100vh;
   width: 100%;
-  background: variables.$negro url("../assets/imagenes/logo-bat.png") no-repeat;
+  background: variables.$negro url("../assets/imagenes/batman-portada1.jpg") no-repeat;
   background-position: center;
   display: flex;
 
@@ -36,13 +36,13 @@ h2, span{
   display: none;
 }
 #subeNivel{
-  background-image: url("../assets/imagenes/fondoLogro.jpg");
+  background-image: url("../assets/imagenes/fondo3.jpg");
 }
 #gameOver{
-  background-image: url("../assets/imagenes/fondoGameOver.jpg");
+  background-image: url("../assets/imagenes/fondoFallo.jpg");
 }
 #endGame{
-  background-image: url("../assets/imagenes/fondoCompletado.jpg");
+  background-image: url("../assets/imagenes/fondoFin.jpg");
 }
 
 .modal{
@@ -70,13 +70,14 @@ h2, span{
         width: 80%;
       }
 }
+
 .btn-cierre{
   display: inline-block;
   width: 40px;
   height: 30px;
       img{
         height: 100%;
-        width: 80%;
+        width: 100%;
       }
 }
 
@@ -93,7 +94,7 @@ h2, span{
   max-width: 0;
   background-image: url('../assets/imagenes/fondo9.jpg');
   background-size: cover;
-  background-position: 30px;
+  background-position: -250px;
   top: 0;
   right: 0;
     ul{
@@ -131,10 +132,10 @@ h2, span{
 //------------------ tema 2
 main{
   @extend %pantallas;
-  background-image: url('../assets/imagenes/mansion.jpg');
+  background-image: url('../assets/imagenes/fondo5.jpg');
 }
 .reverso{
-  background: url('../assets/imagenes/reversoCarta.jpg') no-repeat;
+  background: variables.$negroTransparente url('../assets/imagenes/bat.svg') no-repeat;
 }
 .carta-Valor{
   @extend %cartas;
