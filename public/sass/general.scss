@@ -1,7 +1,7 @@
 @use 'reset';
 @use 'variables';
 @use 'reutilizables';
-@use 'mixins';
+
 
 // ESTILOS GENERALES
 body{
@@ -56,6 +56,10 @@ h2, span{
   padding: 10px;
 }
 
+#tema2{
+  display: none;
+}
+
 #burguer{
   display: none;
   width: 30px;
@@ -85,6 +89,9 @@ h2, span{
   flex-flow: row wrap;
   justify-content: space-between;
   margin: 10px 10px 0 10px;
+}
+#sonido{
+  display: none;
 }
 
 .barra-menu{

@@ -1,24 +1,38 @@
 //--------------- LISTENERS ----------------------
+// boton para subir de nivel al terminar el anterior
 let avanza = document.querySelector("#avanzar");
 avanza.addEventListener("click", subeNivel);
 
+//boton para salir del juego
 let salida = document.querySelectorAll(".salir");
 salida.forEach(function(elemento) {
   elemento.addEventListener("click", Salir);
 });
 
+// boton para reniciar desde cero
 let reinicia = document.querySelectorAll(".reinicia");
 reinicia.forEach(function(elemento) {
   elemento.addEventListener("click", reiniciar);
 });
 
+//boton para reintentar
 let reintenta = document.querySelector(".reintenta");
 reintenta.addEventListener("click", reintentar);
 
+// Procedimiento para cambiar de temade juego
 document.querySelector("#tema").addEventListener("click", function() {
-  document.getElementById('cmbTema').href = './css/tema2.css'
-})
+  this.style.display = "none";
+  document.getElementById('cmbTema').href = './css/tema2.css';
+  document.getElementById('tema2').style.display = "block";
+});
 
+document.querySelector("#tema2").addEventListener("click", function() {
+  document.getElementById('cmbTema').href = './css/general.css';
+  this.style.display = "none";
+  document.getElementById('tema').style.display = "block";
+});
+
+//listeners para cerrar el menu de niveles
 document.querySelector("body").addEventListener("click", clickFueraDeMenu);
 
 document.addEventListener("keydown", teclaEscCierraMenu);
@@ -179,7 +193,7 @@ function clickFueraDeMenu(evento) {
 }
 
 function teclaEscCierraMenu(evento) {
-  console.log(evento.key);
+  
   if (evento.key === "Escape") {
     cerrarMenu();
   }

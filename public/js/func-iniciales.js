@@ -1,11 +1,11 @@
 //----- BOTON DE MENU DE SELECCION DE NIVELES ----
+// Este menu esta disponible si se juega en modo relax
 let btnMenu = document.querySelector("#burguer");
 btnMenu.addEventListener('click', mostrarNiveles);
 
 let cierre = document.querySelector(".btn-cierre");
 cierre.addEventListener('click', cerrarMenu);
 
-document.querySelector("#relax").addEventListener("click", relax);
 
 function mostrarNiveles(evento) {
   evento.stopPropagation();
@@ -17,12 +17,37 @@ function cerrarMenu() {
   menu.classList.remove('visible');
 }
 
+// boton que inicia el modo relax
+document.querySelector("#relax").addEventListener("click", relax);
+
 function relax() {
   modoRelax = true;
   btnMenu.style.display = "block";
   Iniciar();
 }
+//---------------------------------------------------------
 
+
+// Activar o desactivar sonido durante el juego
+let btnSound = document.getElementById("sonido");
+let btnMute = document.getElementById("mute");
+
+//estas funciones solo toman accion sobre el resultado de voltear las cartas. 
+//Los demas audios seguiran sonando
+btnSound.addEventListener("click", () => {
+  btnSound.style.display = "none";
+  btnMute.style.display = "block";
+
+  sonido = true;
+}); 
+btnMute.addEventListener("click", () => {
+  btnMute.style.display = "none";
+  btnSound.style.display = "block";
+
+  sonido = false;
+}); 
+
+//--------------------------------------------------
 
 //----- BOTON DE INICIO (PRIMER PANTALLA) ----
 let inicia = document.querySelector(".comienzo");
@@ -32,17 +57,17 @@ let bienvenida = document.querySelector(".pantallaInicio");
 
 //------------FUNCION DE ARRANQUE--------------------
 function Iniciar() {
-  var nivelTexto = nivelActual + 1;
+  var nivelTexto = nivelActual + 1; //referencia al indicador de niveles.
    indicadorNivel.innerText = "0" + nivelTexto;
    movTotal.innerText = "0" + niveles[nivelActual].movimientos;
 
-
+  // ocultamos la pantalla de inicio y ejecutamos la funcion comienza
   bienvenida.style.display = "none";
   comienza();
 
   if (modoRelax === true) {
     let menuNiveles = document.querySelector("#menuNiveles");
-
+    //creamos la lista que contiene el menu de niveles
     niveles.forEach(function(elemento, indice) {
       let ctrlNiveles = document.createElement("li");
         ctrlNiveles.innerHTML = "<a class='nivel' data-nivel="
@@ -66,13 +91,18 @@ function Iniciar() {
 //------------FUNCION DE CREACION DE MESA DE JUEGO--------------------
 function comienza() {
   document.querySelector("#pistaFondo").load();
-
+  /*seleccionamos el div donde se ubican nuestras cartas y definimos el mazo
+  el mazo sera igual a la variable global niveles(arreglo) y tomamos la posicion en base al valor de
+  la variable nivel actual
+  Por ultimo, ejecutamos la funcion que baraja el grupo de cartas seleccionado */
   let mesa = document.querySelector(".mesa");
   let mazo = niveles[nivelActual].tarjetas;
   let cartas = baraja(mazo);
 
   mesa.innerHTML = "";
-
+  /*Tomamos las cartas barajadas y recorremos el total de estas 
+  para crear su contenido
+  Por ultimo agregamos todas las cartas a la mesa*/
   cartas.forEach(function(elemento) {
       let carta = document.createElement("div");
       carta.setAttribute("class","carta");
@@ -80,14 +110,14 @@ function comienza() {
       "<div class='carta-Valor' data-contenido= " + elemento + ">" + elemento + "</div>";
       mesa.appendChild(carta);
     });
-
+    //asignamos el listener para poder voltear las cartas
     document.querySelectorAll(".carta").forEach(function(elemento) {
       elemento.addEventListener("click", voltear);
     });
 }
 
 //----- FUNCION DE ORDEN ALEATORIO ----
-function baraja(mazo) {
+function baraja(mazo) {//le enviamos el mazo de cartas desde la funcion anterior
   let grupoTarjetas = mazo.concat(mazo);
 
   let resultado = grupoTarjetas.sort(function () {
@@ -100,8 +130,7 @@ function baraja(mazo) {
 function voltear() {
   let descubiertas;
   let totalDescubiertas = document.querySelectorAll(".descubierta");
-  let tarjetasAcertadas;
-
+ 
   if (totalDescubiertas.length > 1) {
     return;
   }
@@ -118,11 +147,15 @@ function voltear() {
 
 //----- FUNCION COMPARA CARTAS ----
 function comparar(descubiertas) {
+  // comparamos el atributo dataset para ver si tienen el mismo contenido
   if (descubiertas[0].dataset.contenido  === descubiertas[1].dataset.contenido) {
     acierto(descubiertas);
-    aciertos.play();
+    if(sonido){
+      aciertos.play();
+    }
 
         let tarjetasAcertadas = document.querySelectorAll(".acertada");
+        //validamos que todas las cartas se hayan acertado
         if (tarjetasAcertadas.length === document.querySelectorAll(".carta").length) {
           setTimeout(function() {
             movimientos = 0;
@@ -137,7 +170,9 @@ function comparar(descubiertas) {
     }
    else {
     error(descubiertas);
-    fallos.play();
+    if(sonido){
+      fallos.play();
+    }
     contadorMovimientos();
    }
 }

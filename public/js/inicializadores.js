@@ -7,6 +7,7 @@ let nivelActual = 0;
 let niveles;
 let tiempo;
 let modoRelax = false;
+let sonido = true;
 let indicadorNivel = document.querySelector("#nivel");
 
 let volteo = document.querySelector("#volteo");

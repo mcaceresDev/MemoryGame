@@ -6,6 +6,7 @@
     <title>Batman Cards</title>
     <link id="cmbTema" rel="stylesheet" href="./css/general.css">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   </head>
 
   <body>
@@ -16,6 +17,7 @@
             <button class="btn comienzo" type="button" name="button">Jugar Ahora</button>
             <button id="relax" class="btn" type="button" name="button">Modo Relax</button>
             <button id="tema" class="btn" type="button" name="button">cambiar tema</button>
+            <button id="tema2" class="btn" type="button" name="button">cambiar tema</button>
           </div>
         </div>
 <!-- ______________CONTENIDO PRINCIPAL________________-->
@@ -39,6 +41,8 @@
             </div>
             <!-- caja de niveles y menu -->
             <div class="niveles">
+              <span id="sonido"><i class="fas fa-volume-up"></i></span>
+              <span id="mute"><i class="fas fa-volume-mute"></i></span>
               <div class="nivelItem">
                 <p>Nivel</p>
                 <span id="nivel">00</span>
@@ -47,8 +51,9 @@
             </div>
           </header>
 <!-- ______________fin cabecera________________-->
-              <div class="mesa"></div>
+              <div class="mesa"></div> <!-- Div donde se crearán las cartas barajadas-->
 
+              <!-- Modal de opciones para subir de nivel -->
               <div id="subeNivel" class="auxiliar">
                   <div class="modal">
                     <h2>¡Lo lograste!</h2>
@@ -57,6 +62,7 @@
                     <button class="btn salir" type="button" name="button">Abandonar Juego</button>
                   </div>
               </div>
+              <!-- Modal de juego perdido para subir de nivel -->
               <div id="gameOver" class="auxiliar">
                   <div class="modal">
                     <span class="content">
@@ -69,6 +75,7 @@
                     <button class="btn salir" type="button" name="button">Salir</button>
                   </div>
               </div>
+              <!-- Modal de juego completado -->
               <div id="endGame" class="auxiliar">
                   <div class="modal">
                     <h2>Juego completado</h2>
