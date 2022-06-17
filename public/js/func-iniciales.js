@@ -1,10 +1,8 @@
 //----- BOTON DE MENU DE SELECCION DE NIVELES ----
 // Este menu esta disponible si se juega en modo relax
-let btnMenu = document.querySelector("#burguer");
-btnMenu.addEventListener('click', mostrarNiveles);
+btnBurguer.addEventListener('click', mostrarNiveles);
 
-let cierre = document.querySelector(".btn-cierre");
-cierre.addEventListener('click', cerrarMenu);
+btnCloseMenu.addEventListener('click', cerrarMenu);
 
 
 function mostrarNiveles(evento) {
@@ -12,6 +10,7 @@ function mostrarNiveles(evento) {
   let menu = document.querySelector(".barra-menu");
   menu.classList.add('visible');
 }
+
 function cerrarMenu() {
   let menu = document.querySelector(".barra-menu");
   menu.classList.remove('visible');

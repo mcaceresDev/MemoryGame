@@ -1,59 +1,61 @@
 
 //---------- VARIABLES GLOBALES ------------
-let cartas;
-let movimientos = 0;
-let movTotal = document.querySelector("#movTotal");
-let nivelActual = 0;
-let niveles;
-let tiempo;
-let modoRelax = false;
-let sonido = true;
-let indicadorNivel = document.querySelector("#nivel");
+class Environment {
+    cards
+    moves   
+    currentLevel
+    levels
+    time
+    relaxMode = false
+    hasSound = true
+    
+    levelIndicator = document.querySelector("#nivel")
+    movesIndicator = document.querySelector("#movTotal")
+    btnCloseMenu = document.querySelector(".btn-cierre");
+    
+    flipSound      = document.querySelector("#volteo")
+    successSound   = document.querySelector("#acertado")
+    failSound      = document.querySelector("#fallo")
+    gameOverSound  = document.querySelector("#fallaste")
 
-let volteo = document.querySelector("#volteo");
-let aciertos = document.querySelector("#acertado");
-let fallos = document.querySelector("#fallo");
-let fallaste = document.querySelector("#fallaste");
+    //-------- INICIALIZADORES ----------------
+    btnBurguer = document.querySelector('#burguer')
 
-//-------- INICIALIZADORES ----------------
-var menu = document.querySelector('#burguer');
+    cards = [['A', 'B', 'E', 'G'],
+    ['C', 'D', 'N', 'O', 'S', 'K'],
+    ['M', 'H', 'V', 'L', 'X', 'Y', 'R', 'Q'],
+    ['Z', 'I', 'F', 'W', '[', 'T', '_', '^', 'U', ']']];
 
-cartas = [['A','B','E','G'],
-          ['C','D','N','O','S','K'],
-          ['M','H','V','L','X','Y','R','Q'],
-          ['Z','I','F','W','[','T','_','^','U',']']
-         ];
-
-niveles = [
-            {
-                tarjetas: cartas[0],
-                movimientos: 8,
-                temporizadorMin: 0,
-                temporizadorSeg: 20
-            },
-            {
-                tarjetas: cartas[1],
-                movimientos: 12,
-                temporizadorMin: 0,
-                temporizadorSeg: 40
-            },
-            {
-                tarjetas: cartas[2],
-                movimientos: 20,
-                temporizadorMin: 1,
-                temporizadorSeg: 0
-            },
-            {
-                tarjetas: cartas[3],
-                movimientos: 25,
-                temporizadorMin: 1,
-                temporizadorSeg: 0
-            },
-            {
-                tarjetas: cartas[2].concat(cartas[0]),
-                movimientos: 30,
-                temporizadorMin: 1,
-                temporizadorSeg: 20
-            }, 
-            
-           ];
+    levels = [
+        {
+            cardGroup: cards[0],
+            maxMoves: 8,
+            maxMinutes: 0,
+            maxSeconds: 20
+        },
+        {
+            cardGroup: cards[1],
+            maxMoves: 12,
+            maxMinutes: 0,
+            maxSeconds: 40
+        },
+        {
+            cardGroup: cards[2],
+            maxMoves: 20,
+            maxMinutes: 1,
+            maxSeconds: 0
+        },
+        {
+            cardGroup: cards[3],
+            maxMoves: 25,
+            maxMinutes: 1,
+            maxSeconds: 0
+        },
+        {
+            cardGroup: cards[2].concat(cards[0]),
+            maxMoves: 30,
+            maxMinutes: 1,
+            maxSeconds: 20
+        }
+    ];
+}
