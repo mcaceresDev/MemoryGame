@@ -1,30 +1,36 @@
 
 //---------- VARIABLES GLOBALES ------------
 class Environment {
+    static instance
+
     cards
-    moves   
+    movesCounter   
     currentLevel
     levels
-    time
-    relaxMode = false
+    timer
+    isRelaxMode = false
     hasSound = true
     
+    /* Elementos HTML */
     levelIndicator = document.querySelector("#nivel")
     movesIndicator = document.querySelector("#movTotal")
-    btnCloseMenu = document.querySelector(".btn-cierre");
+    btnCloseMenu   = document.querySelector(".btn-cierre");
+    btnBurguer     = document.querySelector('#burguer')
     
+    btnSound       = document.getElementById("sonido");
+    btnMute        = document.getElementById("mute");
     flipSound      = document.querySelector("#volteo")
     successSound   = document.querySelector("#acertado")
     failSound      = document.querySelector("#fallo")
     gameOverSound  = document.querySelector("#fallaste")
 
-    //-------- INICIALIZADORES ----------------
-    btnBurguer = document.querySelector('#burguer')
-
-    cards = [['A', 'B', 'E', 'G'],
-    ['C', 'D', 'N', 'O', 'S', 'K'],
-    ['M', 'H', 'V', 'L', 'X', 'Y', 'R', 'Q'],
-    ['Z', 'I', 'F', 'W', '[', 'T', '_', '^', 'U', ']']];
+    /* Elementos interactivos */
+    cards = [
+        ['A', 'B', 'E', 'G'],
+        ['C', 'D', 'N', 'O', 'S', 'K'],
+        ['M', 'H', 'V', 'L', 'X', 'Y', 'R', 'Q'],
+        ['Z', 'I', 'F', 'W', '[', 'T', '_', '^', 'U', ']']
+    ];
 
     levels = [
         {
@@ -58,4 +64,14 @@ class Environment {
             maxSeconds: 20
         }
     ];
+
+    constructor(){
+        if (Environment.instance) {
+            return Environment.instance;
+        }
+        
+        Environment.instance = Environment;
+    }
 }
+
+const env = new Environment()
