@@ -37,7 +37,7 @@ document.querySelector("body").addEventListener("click", clickFueraDeMenu);
 
 document.addEventListener("keydown", teclaEscCierraMenu);
 //---------- TEMPORIZADOR -----------------
-function iniciaTiempo() {
+function runTimer() {
   let segundos = niveles[nivelActual].temporizadorSeg;
   let minutos = niveles[nivelActual].temporizadorMin;
   let segundosTexto;
@@ -111,8 +111,8 @@ function subeNivel() {
   }
 
   document.querySelector("#subeNivel").classList.remove("visible");
-  comienza();
-    iniciaTiempo();
+  setConfigs();
+    runTimer();
 }
 
 //Funcion para establecer Niveles
@@ -120,7 +120,7 @@ function cambiaNivel() {
   var nvl = parseInt(this.dataset.nivel);
   nivelActual = nvl;
   movTotal.innerText = niveles[nivelActual].movimientos;
-  comienza();
+  setConfigs();
 }
 
 //---------- GAME OVER -----------------
@@ -130,8 +130,8 @@ function gameOver() {
 }
 //---------- FUNCION REINICIAR -----------------
 function reiniciar() {
-  let auxiliar = document.querySelectorAll(".auxiliar");
-  auxiliar.forEach(function(elemento) {
+  let auxiliarModal = document.querySelectorAll(".auxiliar");
+  auxiliarModal.forEach(function(elemento) {
     elemento.classList.remove('visible');
   });
   movimientos = 0;
@@ -146,8 +146,8 @@ function reintentar() {
   document.querySelector("#mov").innerText = movimientos;
   clearInterval(tiempo);
 
-  comienza();
-  iniciaTiempo();
+  setConfigs();
+  runTimer();
 
   auxiliar.forEach(function(elemento) {
     elemento.classList.remove('visible');

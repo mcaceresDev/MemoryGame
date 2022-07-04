@@ -28,20 +28,18 @@ class GameOptions {
   }
 
   startGame = () => {
-    
-    // ocultamos la pantalla de inicio y ejecutamos la funcion comienza
     bienvenida.style.display = "none";
-    comienza();
+    setConfigs();
 
     if (modoRelax === true) {
-      let menuNiveles = document.querySelector("#menuNiveles");
-      //creamos la lista que contiene el menu de niveles
-      niveles.forEach(function (elemento, indice) {
-        let ctrlNiveles = document.createElement("li");
-        ctrlNiveles.innerHTML = "<a class='nivel' data-nivel="
-          + indice + "> Nivel " + (indice + 1) + "</a>";
+      let levelsMenu = document.querySelector("#menuNiveles");
 
-        menuNiveles.appendChild(ctrlNiveles);
+      levels.forEach(function (elemento, index) {
+        let btnLevel = document.createElement("li");
+        btnLevel.innerHTML = "<a class='nivel' data-nivel="
+          + index + "> Nivel " + (index + 1) + "</a>";
+
+        levelsMenu.appendChild(btnLevel);
       });
       //asignamos el listener a cada elemento de la lista de seleccion de niveles
       document.querySelectorAll(".nivel").forEach(function (elemento) {
@@ -51,9 +49,7 @@ class GameOptions {
       return;
     }
 
-    else {
-      iniciaTiempo();
-    }
+      runTimer();
   }
 
   // Metodo para actualizar elementos visuales por nivel
@@ -80,7 +76,7 @@ class GameOptions {
 
 
 //------------FUNCION DE CREACION DE MESA DE JUEGO--------------------
-comienza() {
+setConfigs() {
   document.querySelector("#pistaFondo").load();
 
   let table       = document.querySelector(".mesa");
