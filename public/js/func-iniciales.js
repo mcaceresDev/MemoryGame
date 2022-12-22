@@ -1,7 +1,7 @@
 // Este menu esta disponible si se juega en modo relax
-btnBurguer.addEventListener('click', mostrarNiveles);
-btnCloseMenu.addEventListener('click', cerrarMenu);
-btnEnableRelax.querySelector("#relax").addEventListener("click", relax);
+// btnBurguer.addEventListener('click', mostrarNiveles);
+// btnCloseMenu.addEventListener('click', cerrarMenu);
+// btnEnableRelax.querySelector("#relax").addEventListener("click", relax);
 
 //Estas funciones solo toman accion si fallas, fracasas, aciertas o ganas. 
 //Los demas audios seguiran sonando
@@ -28,7 +28,8 @@ class GameOptions {
   }
 
   startGame = () => {
-    bienvenida.style.display = "none";
+    console.log("Has dado click");
+    mainScreen.style.display = "none";
     setConfigs();
 
     if (modoRelax === true) {
@@ -198,3 +199,7 @@ setConfigs() {
 }
 
 }
+
+const btnStart = document.querySelector(".btn-start");
+const gameOptions = new GameOptions();
+btnStart.addEventListener("click", gameOptions.startGame)
