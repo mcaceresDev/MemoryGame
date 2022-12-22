@@ -9,7 +9,10 @@ class ModalCreator {
                 modal = new modalType()
             }
         })
-        return modal.render(modalSettings)
+        
+        // return modal.render(modalSettings)
+        
+        return modal
     }
 
 }
@@ -22,12 +25,14 @@ class ModalSuccess{
     }
 
     render(settings)   {
-        return `<div class="modal">
+        let modalContent =
+        `<div class="modal">
         <h2>${settings == undefined ? this.modalSettings.title : settings.title}</h2>
         <p>${settings == undefined ? this.modalSettings.texto : settings.texto}</p>
         <button id="avanzar" class="btn" type="button" name="button">Siguiente Nivel</button>
         <button class="btn salir" type="button" name="button">Abandonar Juego</button>
       </div>`
+      return modalContent
     }
 }
 
@@ -39,6 +44,7 @@ class ModalFailed{
     }
 
     render(settings){
+        let modalContent =
         `<div class="modal">
         <span class="content">
             <h2>${settings == undefined ? this.modalSettings.title : settings.title}</h2>
@@ -49,6 +55,8 @@ class ModalFailed{
         <button class="btn reinicia" type="button" name="button">Reiniciar</button>
         <button class="btn salir" type="button" name="button">Salir</button>
       </div>`
+
+      return modalContent
     }
 }
 
@@ -60,6 +68,7 @@ class ModalEnd{
     }
 
     render(settings){
+        let modalContent =
         `<div class="modal">
         <h2>${settings == undefined ? this.modalSettings.title : settings.title}</h2>
         <p>${settings == undefined ? this.modalSettings.texto : settings.texto}</p>
@@ -67,6 +76,7 @@ class ModalEnd{
         <button class="btn reinicia" type="button" name="button">Reiniciar</button>
         <button class="btn salir" type="button" name="button">Salir</button>
       </div>`
+      return modalContent
     }
     
 }
