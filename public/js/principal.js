@@ -7,6 +7,7 @@ class Environment {
     relaxMode = false
     hasSound = true
     moves = 0
+    level = document.querySelector("#nivel")
     cards = [
         ['A', 'B', 'E', 'G'],
         ['C', 'D', 'N', 'O', 'S', 'K'],
@@ -19,7 +20,7 @@ class Environment {
             cardGroup: this.cards[0],
             maxMoves: 8,
             maxMinutes: 0,
-            maxSeconds: 5
+            maxSeconds: 20
         },
         {
             cardGroup: this.cards[1],
@@ -116,10 +117,12 @@ class GameFunctions {
         });
 
         moves = 0;
+        document.querySelector("#mov").innerText = moves;
         // clearInterval(time);
         currentLevel = 0;
         mainScreen.style.display = 'flex';
         intro.play();
+        console.log(`Movimientos: ${moves}`);
     }
 
     movesCounter = () => {
@@ -159,7 +162,7 @@ class GameFunctions {
             movimientos = 0;
             document.querySelector("#mov").innerText = movimientos;
             finalizar();
-            clearInterval(tiempo);
+            clearInterval(time);
             }, 1000);
         }
         else {
@@ -299,9 +302,9 @@ const runTimer = () => {
 
 const gameOver = (settings) => {
     clearInterval(time);
-    console.log(`Time desde GameOver ${time}`);
     const gameOverModal = document.querySelector("#gameOver");
-    
+
+    document.querySelector("#mov").innerText = moves;
     let modalFailed = modal.getInstance("failed");
     gameOverSound.play();
     
@@ -314,10 +317,9 @@ const gameOver = (settings) => {
     gameOverModal.innerHTML = modalFailed.render(settings);
     gameOverModal.classList.add("visible");
     document.querySelector("#btn-exit").addEventListener("click", exitGame);
-
 }
 
-function finalizar() {
+function finalizar() { //==========================================================
   if (nivelActual === niveles.length) {
     document.querySelector("#endGame").classList.add("visible");
     return;
@@ -325,6 +327,23 @@ function finalizar() {
   else {
     document.querySelector("#subeNivel").classList.add("visible");
   }
+}
+
+const levelUp = () => {
+  currentLevel++;
+  if (currentLevel === levels.length) {
+    finalizar();
+  }
+  maxMovesIndicator.innerText = levels[currentLevel].maxMoves;
+  let levelIndicator = currentLevel + 1;
+
+  if (levelIndicator < 10) {
+    level.innerText = "0" + levelIndicator;
+  }
+
+  document.querySelector("#subeNivel").classList.remove("visible");
+  setConfigs();
+  runTimer();
 }
 
 //---------- FUNCION REINICIAR -----------------
