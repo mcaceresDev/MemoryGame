@@ -1,7 +1,9 @@
 // Archivo Environment
 class Environment {
     instance
+    time
     currentLevel = 0;
+    maxMovesIndicator = document.querySelector("#movTotal")
     relaxMode = false
     hasSound = true
     moves = 0
@@ -17,7 +19,7 @@ class Environment {
             cardGroup: this.cards[0],
             maxMoves: 8,
             maxMinutes: 0,
-            maxSeconds: 20
+            maxSeconds: 5
         },
         {
             cardGroup: this.cards[1],
@@ -57,15 +59,16 @@ class Environment {
 
 
 const env = new Environment();
-let { relaxMode, levels, currentLevel, hasSound, moves } = env
+let { relaxMode, maxMovesIndicator, levels, currentLevel, hasSound, moves, time } = env
 
 const modal =  new ModalCreator();
-
+// =================================================================================================
+// =================================================================================================
 // Archivo de funciones del juego
 class GameFunctions {
 
     //----- FUNCION DE ORDEN ALEATORIO ----
-     shuffleCards(deck) {
+    shuffleCards(deck) {
       
       let clonedCards = deck.concat(deck);
       let mixedCards = clonedCards.sort(function () {
@@ -75,9 +78,11 @@ class GameFunctions {
       return mixedCards;
     }
 
+    // Crea la mesa con las cartas y configura el evento click a cada carta
     setConfig() {
         document.querySelector("#pistaFondo").load();
-        console.log("Configurando...");
+        maxMovesIndicator.innerText = levels[currentLevel].maxMoves;
+        
         let table       = document.querySelector(".mesa");
         let deckCards   = levels[currentLevel].cardGroup;
         let mixedCards  = shuffleCards(deckCards);
@@ -97,7 +102,25 @@ class GameFunctions {
         document.querySelectorAll(".carta").forEach(function (card) {
           card.addEventListener("click", flip);
         });
-      }
+    }
+
+    exitGame() {
+        if (relaxMode === true) {
+            relaxMode = false;
+            btnMenu.style.display = "none";
+        }
+        let intro = document.querySelector("#pistaFondo");
+        let auxiliar = document.querySelectorAll(".auxiliar");
+        auxiliar.forEach(function(elemento) {
+            elemento.classList.remove('visible');
+        });
+
+        moves = 0;
+        // clearInterval(time);
+        currentLevel = 0;
+        mainScreen.style.display = 'flex';
+        intro.play();
+    }
 
     movesCounter = () => {
         let totalMov = levels[currentLevel].maxMoves;
@@ -110,10 +133,12 @@ class GameFunctions {
         document.querySelector("#mov").innerText = movimientosTexto;
 
         if (moves === totalMov && relaxMode === false) {
-            let perdiste = document.querySelector(".content");
-            perdiste.innerHTML = "<h2>Movimientos Agotados</h2>" + "<p>Has sobrepasado el límite de movimientos</p>";
-            // gameOver();
-            failSound.play();
+            let settings = {
+                title: "Movimientos agotados",
+                text: "Has sobrepasado el límite de movimientos de este nivel"
+            };
+            
+            gameOver(settings);
         }
         return;
     }
@@ -206,7 +231,7 @@ class GameFunctions {
 }
 
 const game = new GameFunctions()
-const { setConfig, shuffleCards, flip, compareCards, error, success, movesCounter } = game
+const { setConfig, exitGame, shuffleCards, flip, compareCards, error, success, movesCounter } = game
 
 
 //Archivo main
@@ -226,10 +251,10 @@ successSound   = document.querySelector("#acertado")
 failSound      = document.querySelector("#fallo")
 gameOverSound  = document.querySelector("#fallaste")
 
-let segundos = levels[currentLevel].maxSeconds;
-let minutos = levels[currentLevel].maxMinutes;
 
 const runTimer = () => {
+    let segundos = levels[currentLevel].maxSeconds;
+    let minutos = levels[currentLevel].maxMinutes;
     
     // if (relaxMode === true) {
     //     return;
@@ -252,9 +277,7 @@ const runTimer = () => {
             segundos = 0;
             minutos = 0;
     
-            clearInterval(time);
-            gameOver();
-            gameOverSound.play();
+            gameOver();        
         }
         
         segundosTexto = segundos;
@@ -271,14 +294,37 @@ const runTimer = () => {
         secondsIndicator.innerText = segundosTexto;
     }
     
-    const time = setInterval(timer, 1000);
+    time = setInterval(timer, 1000);
 }
 
-const gameOver = () => {
+const gameOver = (settings) => {
+    clearInterval(time);
+    console.log(`Time desde GameOver ${time}`);
     const gameOverModal = document.querySelector("#gameOver");
+    
     let modalFailed = modal.getInstance("failed");
-    gameOverModal.innerHTML = modalFailed.render();
+    gameOverSound.play();
+    
+    if (!settings) {
+        gameOverModal.innerHTML = modalFailed.render();
+        gameOverModal.classList.add("visible");
+        document.querySelector("#btn-exit").addEventListener("click", exitGame);
+        return
+    }
+    gameOverModal.innerHTML = modalFailed.render(settings);
     gameOverModal.classList.add("visible");
+    document.querySelector("#btn-exit").addEventListener("click", exitGame);
+
+}
+
+function finalizar() {
+  if (nivelActual === niveles.length) {
+    document.querySelector("#endGame").classList.add("visible");
+    return;
+  }
+  else {
+    document.querySelector("#subeNivel").classList.add("visible");
+  }
 }
 
 //---------- FUNCION REINICIAR -----------------

@@ -101,6 +101,24 @@ setConfigs() {
   });
 }
 
+// function Salir() {
+//   if (modoRelax === true) {
+//     modoRelax = false;
+//     btnMenu.style.display = "none";
+//   }
+//   let intro = document.querySelector("#pistaFondo");
+//   let auxiliar = document.querySelectorAll(".auxiliar");
+//   auxiliar.forEach(function(elemento) {
+//     elemento.classList.remove('visible');
+//   });
+//   movimientos = 0;
+//   clearInterval(tiempo);
+//   nivelActual = 0;
+
+//   bienvenida.style.display = 'flex';
+//   intro.play();
+// }
+
 //----- FUNCION DE ORDEN ALEATORIO ----
  shuffleCards(deck) {
   

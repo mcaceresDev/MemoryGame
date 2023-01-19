@@ -40,7 +40,7 @@ class ModalFailed{
     
     modalSettings = {
         title: "Tiempo agotado",
-        texto: "Has sobrepasado el tiempo límite"
+        text: "Has sobrepasado el tiempo límite"
     }
 
     render(settings){
@@ -49,11 +49,11 @@ class ModalFailed{
         <span class="content">
             <h2>${settings == undefined ? this.modalSettings.title : settings.title}</h2>
             <br>
-            <p>${settings == undefined ? this.modalSettings.texto : settings.texto}</p>
+            <p>${settings == undefined ? this.modalSettings.text : settings.text}</p>
         </span>
         <button class="btn reintenta" type="button" name="button">Reintentar</button>
         <button class="btn reinicia" type="button" name="button">Reiniciar</button>
-        <button class="btn salir" type="button" name="button">Salir</button>
+        <button id="btn-exit" class="btn salir" type="button" name="button">Salir</button>
       </div>`
 
       return modalContent
