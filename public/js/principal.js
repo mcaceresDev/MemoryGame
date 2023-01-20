@@ -60,7 +60,7 @@ class Environment {
 
 
 const env = new Environment();
-let { relaxMode, maxMovesIndicator, levels, currentLevel, hasSound, moves, time } = env
+let { relaxMode, maxMovesIndicator, levels, currentLevel, hasSound, moves, time, level } = env
 
 const modal =  new ModalCreator();
 // =================================================================================================
@@ -150,24 +150,25 @@ class GameFunctions {
     compareCards(descubiertas) {
         // comparamos el atributo dataset para ver si tienen el mismo contenido
         if (descubiertas[0].dataset.contenido === descubiertas[1].dataset.contenido) {
-        success(descubiertas);
-        if (sonido) {
-            successSound.play();
-        }
-    
-        let tarjetasAcertadas = document.querySelectorAll(".acertada");
-        //validamos que todas las cartas se hayan acertado
-        if (tarjetasAcertadas.length === document.querySelectorAll(".carta").length) {
-            setTimeout(function () {
-            movimientos = 0;
-            document.querySelector("#mov").innerText = movimientos;
-            finalizar();
-            clearInterval(time);
-            }, 1000);
-        }
-        else {
-            movesCounter();
-        }
+            success(descubiertas);
+            if (sonido) {
+                successSound.play();
+            }
+        
+            let tarjetasAcertadas = document.querySelectorAll(".acertada");
+            //validamos que todas las cartas se hayan acertado
+            if (tarjetasAcertadas.length === document.querySelectorAll(".carta").length) {
+                console.log("Acertaste todas");
+                setTimeout(function () {
+                    moves = 0;
+                    document.querySelector("#mov").innerText = moves;
+                    finishLevel();
+                    clearInterval(time);
+                }, 1000);
+            }
+            else {
+                movesCounter();
+            }
         }
         else {
         error(descubiertas);
@@ -301,6 +302,7 @@ const runTimer = () => {
 }
 
 const gameOver = (settings) => {
+    console.log("Entre a game over");
     clearInterval(time);
     const gameOverModal = document.querySelector("#gameOver");
 
@@ -316,46 +318,76 @@ const gameOver = (settings) => {
     }
     gameOverModal.innerHTML = modalFailed.render(settings);
     gameOverModal.classList.add("visible");
+    activeModalOptions()
+}
+
+const activeModalOptions = () => {
+    document.querySelector("#btn-exit").addEventListener("click", ()=> console.log("FUNCIONA LPTM"));
+    console.log("Entre a la activacion de botones");
+    const btnNextLevel = document.querySelector("#btn-next")
+    if (btnNextLevel) {
+        btnNextLevel.addEventListener("click", levelUp);
+    }
+
     document.querySelector("#btn-exit").addEventListener("click", exitGame);
 }
 
-function finalizar() { //==========================================================
-  if (nivelActual === niveles.length) {
-    document.querySelector("#endGame").classList.add("visible");
-    return;
-  }
-  else {
-    document.querySelector("#subeNivel").classList.add("visible");
-  }
+function finishLevel(settings) { //==========================================================
+    clearInterval(time);
+    const levelUpModal = document.querySelector("#subeNivel");
+    let modalSuccess = modal.getInstance("success");
+    
+    if (currentLevel === levels.length) {
+        const endModal = document.querySelector("#endGame");
+        let modalSuccess = modal.getInstance("success");
+        endModal.innerHTML = modalSuccess.render()    
+        endModal.classList.add("visible")    
+        activeModalOptions()
+        return;
+    }
+
+    if (!settings) {
+        levelUpModal.innerHTML = modalSuccess.render();
+        levelUpModal.classList.add("visible");
+        activeModalOptions()
+        return
+    }
+    levelUpModal.innerHTML = modalSuccess.render();
+    levelUpModal.classList.add("visible");
+    activeModalOptions()
+    
 }
 
 const levelUp = () => {
-  currentLevel++;
-  if (currentLevel === levels.length) {
-    finalizar();
-  }
-  maxMovesIndicator.innerText = levels[currentLevel].maxMoves;
-  let levelIndicator = currentLevel + 1;
-
-  if (levelIndicator < 10) {
-    level.innerText = "0" + levelIndicator;
-  }
-
-  document.querySelector("#subeNivel").classList.remove("visible");
-  setConfigs();
-  runTimer();
+    console.log("Entre a la funcion");
+    currentLevel++;
+    if (currentLevel === levels.length) {
+      finishLevel();
+      return
+    }
+    maxMovesIndicator.innerText = levels[currentLevel].maxMoves;
+    let levelIndicator = currentLevel + 1;
+    
+    if (levelIndicator < 10) {
+        level.innerText = "0" + levelIndicator;
+    }
+    
+    document.querySelector("#subeNivel").classList.remove("visible");
+    setConfig();
+    runTimer();
+  console.log("Sali de la funcion");
 }
 
 //---------- FUNCION REINICIAR -----------------
-function reiniciar() {
+function restartLevel() {
   let auxiliarModal = document.querySelectorAll(".auxiliar");
   auxiliarModal.forEach(function(elemento) {
     elemento.classList.remove('visible');
   });
-  movimientos = 0;
-  clearInterval(tiempo);
-  nivelActual = 0;
-  Iniciar();
+  moves = 0;
+  clearInterval(time);
+  currentLevel = 0;
+  startGame();
 }
 
 // TRIGGERS
