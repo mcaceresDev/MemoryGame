@@ -30,7 +30,7 @@ class ModalSuccess{
         <h2>${settings == undefined ? this.modalSettings.title : settings.title}</h2>
         <p>${settings == undefined ? this.modalSettings.texto : settings.texto}</p>
         <button id="btn-next" class="btn" type="button" name="button">Siguiente Nivel</button>
-        <button id="btn-exit" class="btn salir" type="button" name="button">Abandonar Juego</button>
+        <button class="btn salir btn-exit" type="button" name="button">Abandonar Juego</button>
       </div>`
       return modalContent
     }
@@ -51,9 +51,9 @@ class ModalFailed{
             <br>
             <p>${settings == undefined ? this.modalSettings.text : settings.text}</p>
         </span>
-        <button class="btn reintenta" type="button" name="button">Reintentar</button>
+        <button class="btn reintenta btn-rest-level" type="button" name="button">Reintentar</button>
         <button class="btn reinicia" type="button" name="button">Reiniciar</button>
-        <button id="btn-exit" class="btn salir" type="button" name="button">Salir</button>
+        <button class="btn salir btn-exit" type="button" name="button">Salir</button>
       </div>`
 
       return modalContent
@@ -74,7 +74,7 @@ class ModalEnd{
         <p>${settings == undefined ? this.modalSettings.texto : settings.texto}</p>
     
         <button class="btn reinicia" type="button" name="button">Reiniciar</button>
-        <button id="btn-exit" class="btn salir" type="button" name="button">Salir</button>
+        <button class="btn salir btn-exit" type="button" name="button">Salir</button>
       </div>`
       return modalContent
     }

@@ -259,13 +259,6 @@ gameOverSound  = document.querySelector("#fallaste")
 const runTimer = () => {
     let segundos = levels[currentLevel].maxSeconds;
     let minutos = levels[currentLevel].maxMinutes;
-    
-    // if (relaxMode === true) {
-    //     return;
-    // }
-    // else {
-    //     const time = setInterval(actualizaTiempo, 1000);
-    // }
 
     const timer = () => {
         let segundosTexto;
@@ -297,12 +290,17 @@ const runTimer = () => {
         minutesIndicator.innerText = minutosTexto;
         secondsIndicator.innerText = segundosTexto;
     }
+
+    if (relaxMode === true) {
+        return;
+    }
+    else {
+        time = setInterval(timer, 1000);
+    }
     
-    time = setInterval(timer, 1000);
 }
 
 const gameOver = (settings) => {
-    console.log("Entre a game over");
     clearInterval(time);
     const gameOverModal = document.querySelector("#gameOver");
 
@@ -322,14 +320,15 @@ const gameOver = (settings) => {
 }
 
 const activeModalOptions = () => {
-    document.querySelector("#btn-exit").addEventListener("click", ()=> console.log("FUNCIONA LPTM"));
-    console.log("Entre a la activacion de botones");
     const btnNextLevel = document.querySelector("#btn-next")
     if (btnNextLevel) {
         btnNextLevel.addEventListener("click", levelUp);
     }
 
-    document.querySelector("#btn-exit").addEventListener("click", exitGame);
+    // document.querySelector("#btn-exit").addEventListener("click", exitGame);
+    document.querySelectorAll(".btn-exit").forEach(function(button){
+        button.addEventListener("click", exitGame)
+    })
 }
 
 function finishLevel(settings) { //==========================================================
@@ -359,7 +358,6 @@ function finishLevel(settings) { //=============================================
 }
 
 const levelUp = () => {
-    console.log("Entre a la funcion");
     currentLevel++;
     if (currentLevel === levels.length) {
       finishLevel();
@@ -375,19 +373,33 @@ const levelUp = () => {
     document.querySelector("#subeNivel").classList.remove("visible");
     setConfig();
     runTimer();
-  console.log("Sali de la funcion");
 }
 
 //---------- FUNCION REINICIAR -----------------
-function restartLevel() {
-  let auxiliarModal = document.querySelectorAll(".auxiliar");
-  auxiliarModal.forEach(function(elemento) {
-    elemento.classList.remove('visible');
-  });
-  moves = 0;
-  clearInterval(time);
-  currentLevel = 0;
-  startGame();
+const restart = () => {
+    let auxiliarModal = document.querySelectorAll(".auxiliar");
+    auxiliarModal.forEach(function(elemento) {
+      elemento.classList.remove('visible');
+    });
+    moves = 0;
+    clearInterval(time);
+    currentLevel = 0;
+    startGame();
+}
+
+//---------- FUNCION REINTENTAR -----------------
+const restartLevel = () => {
+    let auxiliar = document.querySelectorAll(".auxiliar");
+    document.querySelector("#mov").innerText = movimientos;
+    
+    moves = 0;
+    clearInterval(time);
+    setConfig();
+    runTimer();
+
+    auxiliar.forEach(function(elemento) {
+        elemento.classList.remove('visible');
+    });
 }
 
 // TRIGGERS
